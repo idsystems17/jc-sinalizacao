@@ -82,7 +82,7 @@ export default function Showcase({ products, onAddToBudget, addedProductIds }: S
                       src={product.image}
                       alt={product.name}
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 grayscale hover:grayscale-0"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute top-3 left-3">
                       <span className="px-2.5 py-1 text-[8px] font-mono font-bold uppercase tracking-widest text-white bg-editorial-charcoal/90 rounded-sm">
