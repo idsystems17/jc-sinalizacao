@@ -1,0 +1,6 @@
+{
+  "name": "JC Sinalização e Serigrafia",
+  "description": "Vitrine virtual de produtos, serviços e painel de administração em tempo real para gerenciamento de orçamentos e conteúdo da JC Sinalização e Serigrafia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

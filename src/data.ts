@@ -1,0 +1,208 @@
+import { Product, Testimonial, BudgetRequest, CompanySettings } from './types';
+
+export const initialProducts: Product[] = [
+  {
+    id: 'prod-1',
+    name: 'Placa de Sinalização de Segurança Fotoluminescente',
+    category: 'sinalizacao',
+    description: 'Placas de saída de emergência, extintores e rotas de fuga que brilham no escuro em conformidade com as normas ABNT NBR 13434.',
+    image: 'https://images.unsplash.com/photo-1595113316349-9fa4ee24f884?auto=format&fit=crop&q=80&w=600',
+    priceEstimate: 'Sob consulta (Média R$ 25,00/unid)',
+    features: ['Plástico PVC anti-chamas', 'Alta fotoluminescência', 'Fácil fixação com fita dupla face', 'Resistente a raios UV']
+  },
+  {
+    id: 'prod-2',
+    name: 'Camisetas Promocionais e Uniformes (Serigrafia)',
+    category: 'serigrafia',
+    description: 'Personalização de vestuário em alta definição. Perfeito para eventos, uniformes empresariais e ações promocionais de alta durabilidade.',
+    image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=600',
+    priceEstimate: 'A partir de R$ 18,00 (mínimo 20 peças)',
+    features: ['Tinta plastisol ou toque zero', 'Tecido 100% algodão ou poliéster', 'Estamparia em até 4 cores', 'Excelente durabilidade na lavagem']
+  },
+  {
+    id: 'prod-3',
+    name: 'Adesivo de Vinil Recortado Eletronicamente',
+    category: 'adesivos',
+    description: 'Adesivos personalizados de vinil em alta resolução para rótulos, decorações, identificações e brindes. Resistentes à água e calor.',
+    image: 'https://images.unsplash.com/photo-1572375995301-40164e323067?auto=format&fit=crop&q=80&w=600',
+    priceEstimate: 'Calculado por m² (Média R$ 45,00/m²)',
+    features: ['Vinil premium calandrado', 'Recorte digital preciso', 'Opção brilhante ou fosco', 'Fácil aplicação sem bolhas']
+  },
+  {
+    id: 'prod-4',
+    name: 'Banner Comercial em Lona com Bastão e Cordão',
+    category: 'comunicacao',
+    description: 'Banners de alta definição para frentes de lojas, eventos, apresentações acadêmicas ou promoções de produtos.',
+    image: 'https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&q=80&w=600',
+    priceEstimate: 'Média R$ 35,00 (tamanho 80x120cm)',
+    features: ['Lona resistente de 440g', 'Impressão digital solvente', 'Acabamento com madeira e ponteiras', 'Alta saturação de cores']
+  },
+  {
+    id: 'prod-5',
+    name: 'Placa de Sinalização de Trânsito e Loteamentos',
+    category: 'sinalizacao',
+    description: 'Placas indicativas e regulamentares para condomínios, estacionamentos privados, rodovias e sinalização de vias urbanas.',
+    image: 'https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&q=80&w=600',
+    priceEstimate: 'Sob consulta',
+    features: ['Chapa de aço galvanizado ou ACM', 'Película refletiva grau comercial', 'Altamente resistente a intempéries', 'Fixação em postes ou paredes']
+  },
+  {
+    id: 'prod-6',
+    name: 'Adesivação de Veículos e Frotas',
+    category: 'comunicacao',
+    description: 'Sua marca em movimento. Adesivagem parcial ou total de carros, furgões e caminhões com vinil automotivo de alta durabilidade.',
+    image: 'https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&q=80&w=600',
+    priceEstimate: 'Orçamento sob medida',
+    features: ['Vinil automotivo antibolhas', 'Verniz protetivo UV opcional', 'Instalação profissional especializada', 'Remoção limpa sem danificar a pintura']
+  },
+  {
+    id: 'prod-7',
+    name: 'Sacolas Ecológicas Personalizadas',
+    category: 'serigrafia',
+    description: 'Sacolas de TNT ou Algodão Cru estampadas com a sua marca. Ideais para feiras, eventos corporativos e embalagem de produtos diferenciados.',
+    image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=600',
+    priceEstimate: 'A partir de R$ 4,50 (mínimo 50 peças)',
+    features: ['Cores de tecido variadas', 'Estamparia em Silk Screen', 'Costura reforçada de alta resistência', 'Amigável ao meio ambiente']
+  },
+  {
+    id: 'prod-8',
+    name: 'Rótulos Adesivos de Alta Resistência para Embalagens',
+    category: 'adesivos',
+    description: 'Adesivos em bobina ou cartela para cervejas artesanais, cosméticos, alimentos e produtos químicos que necessitam de resistência a umidade.',
+    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600',
+    priceEstimate: 'Orçamento com base em quantidade e tamanho',
+    features: ['Material bopp brilhoso, fosco ou metalizado', 'Corte especial a laser', 'Adesivo permanente forte', 'Resistente a congelamento']
+  }
+];
+
+export const initialTestimonials: Testimonial[] = [
+  {
+    id: 'test-1',
+    name: 'Roberto Camargo',
+    company: 'Construtora Camargo & Associados',
+    rating: 5,
+    comment: 'Excelente atendimento! Encomendamos toda a sinalização de segurança fotoluminescente para um condomínio de 4 blocos. Entrega pontual e produtos em conformidade com todas as normas do Corpo de Bombeiros.',
+    approved: true,
+    createdAt: '2026-05-12T14:30:00Z',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150'
+  },
+  {
+    id: 'test-2',
+    name: 'Ana Júlia Ramos',
+    company: 'Café & Grão Cafeteria',
+    rating: 5,
+    comment: 'Fizemos os uniformes da nossa equipe de baristas e garçons por serigrafia e as sacolas personalizadas. A qualidade do silk nas camisetas é sensacional, já lavamos dezenas de vezes e as estampas continuam como novas.',
+    approved: true,
+    createdAt: '2026-06-02T10:15:00Z',
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150'
+  },
+  {
+    id: 'test-3',
+    name: 'Lucas Ferreira',
+    company: 'Veloce Logística',
+    rating: 4,
+    comment: 'Fizemos a adesivação de 5 utilitários da nossa frota. O vinil aplicado é excelente e o acabamento dos recortes nas curvas do veículo ficou muito profissional. Altamente recomendado.',
+    approved: true,
+    createdAt: '2026-06-20T17:45:00Z',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150'
+  }
+];
+
+export const initialBudgetRequests: BudgetRequest[] = [
+  {
+    id: 'ORC-9582',
+    customerName: 'Marcus Silva Prado',
+    customerEmail: 'marcus.prado@engenhariabrasil.com',
+    customerPhone: '(11) 98765-4321',
+    customerCompany: 'EB Engenharia e Infraestrutura',
+    items: [
+      {
+        id: 'prod-1',
+        name: 'Placa de Sinalização de Segurança Fotoluminescente',
+        category: 'sinalizacao',
+        quantity: 45,
+        observations: 'Sendo 20 placas de saída de emergência de 24x12cm e 25 placas indicadoras de extintor de 20x20cm.'
+      }
+    ],
+    status: 'pending',
+    createdAt: '2026-06-24T14:15:00-07:00',
+    notes: 'Cliente precisa para vistoria no dia 15 do próximo mês. Solicitação recebida pelo site.',
+    totalEstimate: 1125.00
+  },
+  {
+    id: 'ORC-9581',
+    customerName: 'Beatriz Vasconcellos',
+    customerEmail: 'contato@vibeclothing.com.br',
+    customerPhone: '(21) 99888-7766',
+    customerCompany: 'Vibe Clothing Ltda',
+    items: [
+      {
+        id: 'prod-2',
+        name: 'Camisetas Promocionais e Uniformes (Serigrafia)',
+        category: 'serigrafia',
+        quantity: 100,
+        observations: 'Frente estampada em 1 cor (logo pequeno) e costas com estampa grande em 2 cores. Camisetas na cor preta, tamanhos variados.'
+      }
+    ],
+    status: 'review',
+    createdAt: '2026-06-23T11:02:00-07:00',
+    notes: 'Estamos cotando tecido 100% algodão fio 30.1 penteado.',
+    totalEstimate: 2200.00
+  },
+  {
+    id: 'ORC-9580',
+    customerName: 'Rodrigo Antunes Mendonça',
+    customerEmail: 'comercial@mendoncaalimentos.com',
+    customerPhone: '(31) 97555-1122',
+    customerCompany: 'Mendonça Embutidos e Laticínios',
+    items: [
+      {
+        id: 'prod-8',
+        name: 'Rótulos Adesivos de Alta Resistência para Embalagens',
+        category: 'adesivos',
+        quantity: 1500,
+        observations: 'Material BOPP Brilhante com corte redondo de 8cm de diâmetro. Enviamos a arte em vetor por e-mail.'
+      }
+    ],
+    status: 'approved',
+    createdAt: '2026-06-22T09:40:00-07:00',
+    notes: 'Preço de R$ 0,45 por rótulo aprovado pelo cliente. Produção agendada.',
+    totalEstimate: 675.00
+  },
+  {
+    id: 'ORC-9579',
+    customerName: 'Gabriela Souza',
+    customerEmail: 'gabriela.souza@outlook.com',
+    customerPhone: '(11) 98111-2233',
+    items: [
+      {
+        id: 'prod-4',
+        name: 'Banner Comercial em Lona com Bastão e Cordão',
+        category: 'comunicacao',
+        quantity: 2,
+        width: 100,
+        height: 150,
+        observations: 'Banners para festa de aniversário infantil. Mandaremos foto do tema.'
+      }
+    ],
+    status: 'completed',
+    createdAt: '2026-06-20T15:20:00-07:00',
+    notes: 'Entregues e pagos no balcão. Cliente extremamente satisfeito.',
+    totalEstimate: 120.00
+  }
+];
+
+export const defaultCompanySettings: CompanySettings = {
+  name: 'JC Sinalização e Serigrafia',
+  phone: '5527992526272',
+  phoneFormatted: '(27) 99252-6272',
+  phoneLandline: '(27) 3058-1522',
+  email: '',
+  address: 'Centro Comercial Planalto — Pátio do Posto Triângulo, Rod. Gov. Mário Covas, Planalto de Carapina, Serra - ES, CEP 29162-703',
+  hours: 'Seg. a Sex.: 08h às 18h | Sábado: 08h às 12h | Domingo: Fechado',
+  instagram: 'https://www.instagram.com/jc_adesivos',
+  facebook: '',
+  locationUrl: 'https://maps.google.com/maps?q=Planalto+de+Carapina+Serra+ES+29162-703&t=&z=15&ie=UTF8&iwloc=&output=embed',
+  latitude: -20.1306,
+  longitude: -40.2786
+};
