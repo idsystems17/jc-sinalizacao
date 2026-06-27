@@ -396,7 +396,7 @@ export default function AdminPanel({
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-grow p-6 sm:p-10 overflow-y-auto max-w-7xl mx-auto w-full text-left">
+      <main className="flex-grow p-4 sm:p-6 lg:p-10 overflow-y-auto max-w-7xl mx-auto w-full text-left">
         
         {/* TAB 1: VISÃO GERAL (DASHBOARD) */}
         {activeTab === 'dashboard' && (
@@ -587,18 +587,17 @@ export default function AdminPanel({
                           setSelectedBudget(budget);
                           setCustomPrice(budget.totalEstimate ? budget.totalEstimate.toString() : '');
                         }}
-                        className={`w-full text-left p-4 rounded-2xl border transition-all flex items-center justify-between cursor-pointer ${
+                        className={`w-full text-left p-4 rounded-2xl border transition-all flex items-center justify-between gap-3 cursor-pointer ${
                           selectedBudget?.id === budget.id
                             ? 'bg-[#FF4500]/5 border-[#FF4500]/30 shadow-sm'
                             : 'bg-white border-gray-100 hover:border-gray-200'
                         }`}
                       >
-                        <div>
+                        <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2">
-                            <span className="text-xs font-mono font-bold text-gray-400">{budget.id}</span>
-                            <span className="text-sm font-black text-gray-900 truncate max-w-[180px]">{budget.customerName}</span>
+                            <span className="text-xs font-mono font-bold text-gray-400 flex-shrink-0">{budget.id}</span>
+                            <span className="text-sm font-black text-gray-900 truncate">{budget.customerName}</span>
                           </div>
-                          
                           <div className="flex items-center gap-2 mt-1">
                             <span className="text-xs text-gray-500">
                               {budget.items.length} {budget.items.length === 1 ? 'item' : 'itens'}
@@ -610,7 +609,7 @@ export default function AdminPanel({
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-3">
+                        <div className="flex flex-col items-end gap-1 flex-shrink-0">
                           {budget.totalEstimate && budget.totalEstimate > 0 ? (
                             <span className="text-xs font-bold text-gray-800">
                               R$ {budget.totalEstimate.toFixed(2)}
@@ -620,7 +619,6 @@ export default function AdminPanel({
                               Sob cotação
                             </span>
                           )}
-
                           <span className={`text-[10px] uppercase font-black tracking-wider px-2 py-1 rounded-md ${
                             budget.status === 'pending' ? 'bg-orange-50 text-orange-600' :
                             budget.status === 'review' ? 'bg-amber-50 text-amber-600' :
