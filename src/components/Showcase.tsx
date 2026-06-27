@@ -17,7 +17,8 @@ export default function Showcase({ products, onAddToBudget, addedProductIds }: S
     { id: 'sinalizacao', label: 'Sinalização' },
     { id: 'serigrafia', label: 'Serigrafia / Silk' },
     { id: 'comunicacao', label: 'Comunicação Visual' },
-    { id: 'adesivos', label: 'Adesivos & Rótulos' }
+    { id: 'adesivos', label: 'Adesivos & Rótulos' },
+    { id: 'peliculas', label: 'Películas' }
   ];
 
   const filteredProducts = activeCategory === 'all'
@@ -87,7 +88,8 @@ export default function Showcase({ products, onAddToBudget, addedProductIds }: S
                       <span className="px-2.5 py-1 text-[8px] font-mono font-bold uppercase tracking-widest text-white bg-editorial-charcoal/90 rounded-sm">
                         {product.category === 'sinalizacao' ? 'Sinalização' :
                          product.category === 'serigrafia' ? 'Serigrafia' :
-                         product.category === 'comunicacao' ? 'Comunicação' : 'Adesivos'}
+                         product.category === 'comunicacao' ? 'Comunicação' :
+                         product.category === 'peliculas' ? 'Películas' : 'Adesivos'}
                       </span>
                     </div>
                   </div>

@@ -775,6 +775,7 @@ export default function AdminPanel({
                         <option value="serigrafia">Serigrafia / Silk Screen</option>
                         <option value="comunicacao">Comunicação Visual</option>
                         <option value="adesivos">Adesivos Personalizados</option>
+                        <option value="peliculas">Películas de Proteção Solar</option>
                       </select>
                     </div>
                   </div>

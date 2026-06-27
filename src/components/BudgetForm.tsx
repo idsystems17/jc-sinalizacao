@@ -242,7 +242,8 @@ export default function BudgetForm({ selectedProducts, onRemoveProduct, onClearP
                                 Categoria:{' '}
                                 {item.category === 'sinalizacao' ? 'Sinalização' :
                                  item.category === 'serigrafia' ? 'Serigrafia' :
-                                 item.category === 'comunicacao' ? 'Comunicação' : 'Adesivos'}
+                                 item.category === 'comunicacao' ? 'Comunicação' :
+                                 item.category === 'peliculas' ? 'Películas' : 'Adesivos'}
                               </span>
                             </div>
 

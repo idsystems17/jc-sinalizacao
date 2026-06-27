@@ -1,7 +1,7 @@
 export interface Product {
   id: string;
   name: string;
-  category: 'sinalizacao' | 'serigrafia' | 'comunicacao' | 'adesivos';
+  category: 'sinalizacao' | 'serigrafia' | 'comunicacao' | 'adesivos' | 'peliculas';
   description: string;
   image: string;
   priceEstimate?: string;
@@ -11,7 +11,7 @@ export interface Product {
 export interface Service {
   id: string;
   name: string;
-  category: 'sinalizacao' | 'serigrafia' | 'comunicacao' | 'adesivos';
+  category: 'sinalizacao' | 'serigrafia' | 'comunicacao' | 'adesivos' | 'peliculas';
   description: string;
   image: string;
   features: string[];

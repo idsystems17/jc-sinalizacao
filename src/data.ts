@@ -72,6 +72,51 @@ export const initialProducts: Product[] = [
     image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600',
     priceEstimate: 'Orçamento com base em quantidade e tamanho',
     features: ['Material bopp brilhoso, fosco ou metalizado', 'Corte especial a laser', 'Adesivo permanente forte', 'Resistente a congelamento']
+  },
+  {
+    id: 'prod-9',
+    name: 'Película Tintada / Profissional',
+    category: 'peliculas',
+    description: 'Linha de entrada com ótimo custo-benefício. Reduz luminosidade, oferece privacidade e proteção solar básica para residências e veículos.',
+    image: '/pelicula-tintada.jpg',
+    priceEstimate: 'A partir de R$ 112,00 (rolo 7,5M)',
+    features: ['Proteção UV 30% a 50%', 'Redução de luminosidade', 'Fácil instalação', 'Ideal para residências e comércio', '1 ano de garantia']
+  },
+  {
+    id: 'prod-10',
+    name: 'Película Carbono / Cerâmica',
+    category: 'peliculas',
+    description: 'Linha premium com alta rejeição de infravermelho. Não interfere em GPS, rádio ou Bluetooth. Cor uniforme e durabilidade superior.',
+    image: '/pelicula-tintada.jpg',
+    priceEstimate: 'A partir de R$ 189,00 (rolo 7,5M)',
+    features: ['Alta rejeição de calor (IR)', 'Bloqueia 99% dos raios UV', 'Não interfere em sinais eletrônicos', 'Não desbota com o tempo', 'Até 15 anos de garantia']
+  },
+  {
+    id: 'prod-11',
+    name: 'Película Prata Espelhada',
+    category: 'peliculas',
+    description: 'Campeã em conforto térmico — reflete até 80% da energia solar. Acabamento cromado em ambas as faces, ideal para fachadas modernas e prédios comerciais.',
+    image: '/pelicula-prata.jpg',
+    priceEstimate: 'A partir de R$ 275,00 (rolo 7,5M)',
+    features: ['Rejeita até 80% da energia solar', 'Efeito espelho externo durante o dia', 'Blindagem contra desbotamento de móveis', 'Reduz drasticamente o uso de ar-condicionado', '5 anos de garantia']
+  },
+  {
+    id: 'prod-12',
+    name: 'Película Titanium / Super Titanium',
+    category: 'peliculas',
+    description: 'Tecnologia de metais nobres com visual luxuoso e moderno. Reflexo metalizado escurecido com visibilidade interna superior às películas comuns.',
+    image: '/pelicula-titanium.jpg',
+    priceEstimate: 'A partir de R$ 275,00 (rolo 7,5M)',
+    features: ['Visual extremamente luxuoso', 'Metais nobres refletem o calor antes de atravessar o vidro', 'Visibilidade interna superior', 'Cor não desbota nem fica roxa', '5 anos de garantia']
+  },
+  {
+    id: 'prod-13',
+    name: 'Película Jateado (Privacidade)',
+    category: 'peliculas',
+    description: 'Imita o visual de vidro jateado de forma reversível e econômica. Oferece privacidade sem bloquear totalmente a luz. Ideal para banheiros, escritórios e divisórias.',
+    image: '/pelicula-prata.jpg',
+    priceEstimate: 'A partir de R$ 260,00 (rolo 7,5M)',
+    features: ['Efeito vidro jateado cristal', 'Privacidade sem bloquear a luz', 'Aplicação reversível', 'Ideal para divisórias e banheiros', 'Entregamos em toda a Grande Vitória']
   }
 ];
 
