@@ -2,12 +2,8 @@ import React, { useState } from 'react';
 import { Lock, User, Eye, EyeOff, Shield, AlertCircle } from 'lucide-react';
 import Logo from './Logo';
 
-// SHA-256 hashes das senhas — todos com senha padrão: jc2024
-const USERS = [
-  { username: 'admin',   hash: 'a44af9b8eacccf4229b3680de7eaa8cb3d00804a7d72b6952dc564c8af389d5b' },
-  { username: 'gerente', hash: 'a44af9b8eacccf4229b3680de7eaa8cb3d00804a7d72b6952dc564c8af389d5b' },
-  { username: 'equipe',  hash: 'a44af9b8eacccf4229b3680de7eaa8cb3d00804a7d72b6952dc564c8af389d5b' },
-];
+// SHA-256 da senha de acesso: jc2024
+const SENHA_HASH = 'a44af9b8eacccf4229b3680de7eaa8cb3d00804a7d72b6952dc564c8af389d5b';
 
 async function sha256(message: string): Promise<string> {
   const buffer = new TextEncoder().encode(message);
@@ -36,13 +32,12 @@ export default function LoginModal({ onLogin, onClose }: LoginModalProps) {
 
     try {
       const hash = await sha256(password);
-      const user = USERS.find(u => u.username === username.toLowerCase() && u.hash === hash);
 
-      if (user) {
-        sessionStorage.setItem('jc_auth_user', user.username);
-        onLogin(user.username);
+      if (hash === SENHA_HASH) {
+        sessionStorage.setItem('jc_auth_user', username || 'admin');
+        onLogin(username || 'admin');
       } else {
-        setError('Usuário ou senha incorretos.');
+        setError('Senha incorreta. Tente novamente.');
       }
     } catch {
       setError('Erro ao verificar credenciais. Tente novamente.');
