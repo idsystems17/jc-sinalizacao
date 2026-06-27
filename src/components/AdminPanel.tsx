@@ -21,6 +21,7 @@ import {
   Pencil
 } from 'lucide-react';
 import { BudgetRequest, Product, Testimonial, CompanySettings, PortfolioItem } from '../types';
+import ImageUploader from './ImageUploader';
 
 interface AdminPanelProps {
   products: Product[];
@@ -842,16 +843,11 @@ export default function AdminPanel({
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-xs font-bold text-gray-600 block mb-1">URL da Imagem</label>
-                      <input
-                        type="text"
-                        value={newProdImage}
-                        onChange={(e) => setNewProdImage(e.target.value)}
-                        className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:bg-white focus:border-[#FF4500] focus:outline-none"
-                        placeholder="URL de imagem Unsplash ou deixe em branco"
-                      />
-                    </div>
+                    <ImageUploader
+                      label="Foto do Produto"
+                      value={newProdImage}
+                      onChange={setNewProdImage}
+                    />
                     <div>
                       <label className="text-xs font-bold text-gray-600 block mb-1">Preço Sugerido (Est./Lote/Medida)</label>
                       <input
@@ -988,13 +984,10 @@ export default function AdminPanel({
                           </div>
                         </div>
                         <div>
-                          <label className="text-[10px] font-bold text-gray-600 block mb-1">URL da Foto</label>
-                          <input
-                            type="text"
+                          <ImageUploader
+                            label="Foto do Produto"
                             value={editProdImage}
-                            onChange={(e) => setEditProdImage(e.target.value)}
-                            className="w-full p-2 bg-white border border-gray-200 rounded-xl text-xs focus:border-blue-400 focus:outline-none font-mono"
-                            placeholder="/nome-da-foto.jpg ou https://..."
+                            onChange={setEditProdImage}
                           />
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1075,7 +1068,10 @@ export default function AdminPanel({
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    if (!newPortTitle || !newPortImage) return;
+                    if (!newPortTitle || !newPortImage) {
+                      alert('Adicione um título e uma foto para continuar.');
+                      return;
+                    }
                     const item: PortfolioItem = {
                       id: `port-${Date.now()}`,
                       title: newPortTitle,
@@ -1115,17 +1111,12 @@ export default function AdminPanel({
                       />
                     </div>
                   </div>
-                  <div>
-                    <label className="text-xs font-bold text-gray-600 block mb-1">URL da Imagem *</label>
-                    <input
-                      type="text"
-                      required
-                      value={newPortImage}
-                      onChange={(e) => setNewPortImage(e.target.value)}
-                      className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:bg-white focus:border-[#FF4500] focus:outline-none font-mono"
-                      placeholder="/nome-da-foto.jpg ou https://..."
-                    />
-                  </div>
+                  <ImageUploader
+                    label="Foto do Portfólio"
+                    required
+                    value={newPortImage}
+                    onChange={setNewPortImage}
+                  />
                   <div>
                     <label className="text-xs font-bold text-gray-600 block mb-1">Descrição (Opcional)</label>
                     <input
