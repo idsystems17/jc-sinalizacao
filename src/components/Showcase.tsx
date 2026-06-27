@@ -61,7 +61,7 @@ export default function Showcase({ products, onAddToBudget, addedProductIds }: S
         </div>
 
         {/* Products Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence mode="popLayout">
             {filteredProducts.map((product) => {
               const isAdded = addedProductIds.includes(product.id);
