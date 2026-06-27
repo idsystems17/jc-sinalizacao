@@ -15,7 +15,7 @@ export const initialProducts: Product[] = [
     name: 'Camisetas Promocionais e Uniformes (Serigrafia)',
     category: 'serigrafia',
     description: 'Personalização de vestuário em alta definição. Perfeito para eventos, uniformes empresariais e ações promocionais de alta durabilidade.',
-    image: '/foto-vinil-2.jpg',
+    image: '/insta-nova-4.jpg',
     priceEstimate: 'A partir de R$ 18,00 (mínimo 20 peças)',
     features: ['Tinta plastisol ou toque zero', 'Tecido 100% algodão ou poliéster', 'Estamparia em até 4 cores', 'Excelente durabilidade na lavagem']
   },
@@ -114,7 +114,7 @@ export const initialProducts: Product[] = [
     name: 'Película Jateado (Privacidade)',
     category: 'peliculas',
     description: 'Imita o visual de vidro jateado de forma reversível e econômica. Oferece privacidade sem bloquear totalmente a luz. Ideal para banheiros, escritórios e divisórias.',
-    image: '/foto-vinil-5.jpg',
+    image: '/insta-nova-3.jpg',
     priceEstimate: 'A partir de R$ 260,00 (rolo 7,5M)',
     features: ['Efeito vidro jateado cristal', 'Privacidade sem bloquear a luz', 'Aplicação reversível', 'Ideal para divisórias e banheiros', 'Entregamos em toda a Grande Vitória']
   }
@@ -279,6 +279,20 @@ export const initialPortfolioItems: PortfolioItem[] = [
     category: 'Adesivos & Vinil',
     image: '/foto-vinil-5.jpg',
     description: 'Aplicação de adesivo mosaico decorativo em área de cozinha residencial.'
+  },
+  {
+    id: 'port-7',
+    title: 'Cozinha transformada com película jateada',
+    category: 'Películas',
+    image: '/insta-nova-3.jpg',
+    description: 'Resultado de aplicação de película jateada em armários de cozinha moderna. Acabamento elegante e privacidade sem bloquear a luz.'
+  },
+  {
+    id: 'port-8',
+    title: 'Dentro da JC — variedade de materiais',
+    category: 'Adesivos & Vinil',
+    image: '/insta-nova-2.jpg',
+    description: 'Estoque completo de vinil e adesivos coloridos disponíveis na loja para pronta entrega.'
   }
 ];
 

@@ -35,7 +35,7 @@ import WhatsAppChat from './components/WhatsAppChat';
 import LoginModal from './components/LoginModal';
 
 // Versão dos dados — incrementar força re-seed no localStorage
-const DATA_VERSION = '2';
+const DATA_VERSION = '3';
 
 export default function App() {
   const [isAdmin, setIsAdmin] = useState(false);
