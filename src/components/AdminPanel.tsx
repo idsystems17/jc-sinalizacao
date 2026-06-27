@@ -289,7 +289,7 @@ export default function AdminPanel({
   });
 
   return (
-    <div className="pt-24 min-h-screen bg-[#FAF9F6] flex flex-col md:flex-row">
+    <div className="pt-24 min-h-screen bg-[#FAF9F6] flex flex-col md:flex-row overflow-x-hidden">
       
       {/* Sidebar Controls Panel */}
       <aside className="w-full md:w-64 bg-editorial-charcoal text-white flex-shrink-0 text-left border-r border-editorial-charcoal/10 flex flex-col justify-between">
@@ -619,7 +619,7 @@ export default function AdminPanel({
                               Sob cotação
                             </span>
                           )}
-                          <span className={`text-[10px] uppercase font-black tracking-wider px-2 py-1 rounded-md ${
+                          <span className={`text-[10px] uppercase font-black px-2 py-1 rounded-md whitespace-nowrap ${
                             budget.status === 'pending' ? 'bg-orange-50 text-orange-600' :
                             budget.status === 'review' ? 'bg-amber-50 text-amber-600' :
                             budget.status === 'approved' ? 'bg-blue-50 text-blue-600' : 'bg-green-50 text-emerald-600'
@@ -666,14 +666,14 @@ export default function AdminPanel({
                           <span className="text-sm font-bold text-gray-800">{selectedBudget.customerCompany}</span>
                         </div>
                       )}
-                      <div className="grid grid-cols-2 gap-2 pt-1">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                         <div>
                           <span className="text-gray-400 block font-medium">Telefone:</span>
-                          <span className="font-bold text-gray-800">{selectedBudget.customerPhone}</span>
+                          <span className="font-bold text-gray-800 break-all">{selectedBudget.customerPhone}</span>
                         </div>
                         <div>
                           <span className="text-gray-400 block font-medium">E-mail:</span>
-                          <span className="font-bold text-gray-800 truncate block">{selectedBudget.customerEmail}</span>
+                          <span className="font-bold text-gray-800 break-all block">{selectedBudget.customerEmail}</span>
                         </div>
                       </div>
                     </div>
@@ -685,9 +685,9 @@ export default function AdminPanel({
                       </h4>
                       {selectedBudget.items.map((item, index) => (
                         <div key={item.id} className="space-y-1">
-                          <div className="flex justify-between items-baseline font-bold text-gray-800">
-                            <span>{item.quantity}x {item.name}</span>
-                          </div>
+                          <p className="font-bold text-gray-800 break-words leading-snug">
+                            {item.quantity}x {item.name}
+                          </p>
                           {item.width && item.height && (
                             <div className="text-gray-500 font-mono text-[10px]">
                               Tamanho: {item.width}cm x {item.height}cm
