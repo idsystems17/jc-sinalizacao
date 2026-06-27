@@ -31,7 +31,7 @@ export default function LoginModal({ onLogin, onClose }: LoginModalProps) {
     setError('');
 
     try {
-      const hash = await sha256(password);
+      const hash = await sha256(password.trim());
 
       if (hash === SENHA_HASH) {
         sessionStorage.setItem('jc_auth_user', username || 'admin');
@@ -93,6 +93,9 @@ export default function LoginModal({ onLogin, onClose }: LoginModalProps) {
                   type={showPassword ? 'text' : 'password'}
                   required
                   autoComplete="current-password"
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  spellCheck={false}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full pl-10 pr-10 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:bg-white focus:border-[#E8650C] focus:outline-none transition-colors"
