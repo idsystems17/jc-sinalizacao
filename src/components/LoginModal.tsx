@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Lock, User, Eye, EyeOff, Shield, AlertCircle } from 'lucide-react';
 import Logo from './Logo';
 
-// SHA-256 da senha de acesso: jc2024
-const SENHA_HASH = 'a44af9b8eacccf4229b3680de7eaa8cb3d00804a7d72b6952dc564c8af389d5b';
+// SHA-256 da senha de acesso: jc2026
+const SENHA_HASH = '6de11ed320879c99959d522c3ec178cef2d57cb3d21dd6b55daaf65dc8e9b87a';
 
 async function sha256(message: string): Promise<string> {
   const buffer = new TextEncoder().encode(message);
