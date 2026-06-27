@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Instagram,
@@ -45,19 +45,15 @@ export default function App() {
   );
 
   // Atalho secreto: Ctrl + Alt + J abre o login
-  const keysRef = useRef<Set<string>>(new Set());
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      keysRef.current.add(e.key);
-      if (keysRef.current.has('Control') && keysRef.current.has('Alt') && keysRef.current.has('j')) {
+      if (e.key === 'j' && e.ctrlKey && e.altKey) {
         e.preventDefault();
         if (!isAdmin && !showLoginModal) setShowLoginModal(true);
       }
     };
-    const up = (e: KeyboardEvent) => keysRef.current.delete(e.key);
     window.addEventListener('keydown', down);
-    window.addEventListener('keyup', up);
-    return () => { window.removeEventListener('keydown', down); window.removeEventListener('keyup', up); };
+    return () => window.removeEventListener('keydown', down);
   }, [isAdmin, showLoginModal]);
 
   const [currentSection, setCurrentSection] = useState('home');
@@ -275,9 +271,6 @@ export default function App() {
             {/* Sobre a empresa */}
             <About />
 
-            {/* Como Funciona — 3 passos */}
-            <HowItWorks />
-
             {/* Filterable Products & Services Showcase */}
             <Showcase
               products={products}
@@ -287,6 +280,9 @@ export default function App() {
 
             {/* Portfólio de trabalhos realizados */}
             <Portfolio items={portfolioItems} />
+
+            {/* Como Funciona — 3 passos */}
+            <HowItWorks />
 
             {/* Quote Calculator Interactive Budget Request Form */}
             <BudgetForm
