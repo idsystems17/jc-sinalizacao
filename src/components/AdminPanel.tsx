@@ -16,15 +16,18 @@ import {
   X,
   RefreshCw,
   PhoneCall,
-  LogOut
+  LogOut,
+  Images
 } from 'lucide-react';
-import { BudgetRequest, Product, Testimonial, CompanySettings } from '../types';
+import { BudgetRequest, Product, Testimonial, CompanySettings, PortfolioItem } from '../types';
 
 interface AdminPanelProps {
   products: Product[];
   onUpdateProducts: (prods: Product[]) => void;
   testimonials: Testimonial[];
   onUpdateTestimonials: (tests: Testimonial[]) => void;
+  portfolioItems: PortfolioItem[];
+  onUpdatePortfolio: (items: PortfolioItem[]) => void;
   settings: CompanySettings;
   onUpdateSettings: (set: CompanySettings) => void;
   onLogout: () => void;
@@ -35,13 +38,15 @@ export default function AdminPanel({
   onUpdateProducts,
   testimonials,
   onUpdateTestimonials,
+  portfolioItems,
+  onUpdatePortfolio,
   settings,
   onUpdateSettings,
   onLogout
 }: AdminPanelProps) {
-  
-  // Tab states: 'dashboard', 'budgets', 'catalog', 'testimonials', 'settings'
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'budgets' | 'catalog' | 'testimonials' | 'settings'>('dashboard');
+
+  // Tab states
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'budgets' | 'catalog' | 'portfolio' | 'testimonials' | 'settings'>('dashboard');
 
   // Budget requests local state
   const [budgets, setBudgets] = useState<BudgetRequest[]>([]);
@@ -60,6 +65,13 @@ export default function AdminPanel({
   const [newProdImage, setNewProdImage] = useState('');
   const [newProdFeatures, setNewProdFeatures] = useState('');
   const [newProdPrice, setNewProdPrice] = useState('');
+
+  // Portfolio manager state
+  const [isAddingPortfolioItem, setIsAddingPortfolioItem] = useState(false);
+  const [newPortTitle, setNewPortTitle] = useState('');
+  const [newPortCategory, setNewPortCategory] = useState('');
+  const [newPortImage, setNewPortImage] = useState('');
+  const [newPortDesc, setNewPortDesc] = useState('');
 
   // Settings manager state
   const [editPhone, setEditPhone] = useState(settings.phone);
@@ -286,6 +298,16 @@ export default function AdminPanel({
             >
               <ShoppingBag className="w-4.5 h-4.5" />
               Gerenciar Vitrine
+            </button>
+
+            <button
+              onClick={() => setActiveTab('portfolio')}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded text-xs uppercase tracking-wider font-bold transition-all cursor-pointer ${
+                activeTab === 'portfolio' ? 'bg-editorial-gold text-white' : 'text-white/70 hover:bg-white/5'
+              }`}
+            >
+              <Images className="w-4.5 h-4.5" />
+              Portfólio
             </button>
 
             <button
@@ -886,7 +908,155 @@ export default function AdminPanel({
           </div>
         )}
 
-        {/* TAB 4: APROVAÇÃO DE DEPOIMENTOS */}
+        {/* TAB 4: PORTFÓLIO */}
+        {activeTab === 'portfolio' && (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="flex justify-between items-center">
+              <div>
+                <h1 className="text-2xl font-black text-gray-900 tracking-tight">Gerenciar Portfólio</h1>
+                <p className="text-sm text-gray-500 mt-1">Adicione ou remova fotos exibidas na seção de portfólio do site.</p>
+              </div>
+              <button
+                onClick={() => setIsAddingPortfolioItem(!isAddingPortfolioItem)}
+                className="flex items-center gap-1.5 px-4 py-2.5 bg-[#FF4500] text-white text-xs font-black rounded-xl hover:bg-orange-600 cursor-pointer shadow-md"
+              >
+                {isAddingPortfolioItem ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                {isAddingPortfolioItem ? 'Cancelar' : 'Adicionar Foto'}
+              </button>
+            </div>
+
+            {/* Formulário de nova foto */}
+            {isAddingPortfolioItem && (
+              <div className="bg-white border border-gray-100 p-6 rounded-3xl shadow-sm">
+                <h3 className="text-base font-extrabold text-gray-900 mb-5">Nova foto no portfólio</h3>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (!newPortTitle || !newPortImage) return;
+                    const item: PortfolioItem = {
+                      id: `port-${Date.now()}`,
+                      title: newPortTitle,
+                      category: newPortCategory || 'Geral',
+                      image: newPortImage,
+                      description: newPortDesc || undefined
+                    };
+                    onUpdatePortfolio([item, ...portfolioItems]);
+                    setNewPortTitle('');
+                    setNewPortCategory('');
+                    setNewPortImage('');
+                    setNewPortDesc('');
+                    setIsAddingPortfolioItem(false);
+                  }}
+                  className="space-y-4"
+                >
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-bold text-gray-600 block mb-1">Título *</label>
+                      <input
+                        type="text"
+                        required
+                        value={newPortTitle}
+                        onChange={(e) => setNewPortTitle(e.target.value)}
+                        className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:bg-white focus:border-[#FF4500] focus:outline-none"
+                        placeholder="Ex: Adesivação de frota — Empresa XYZ"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-bold text-gray-600 block mb-1">Categoria</label>
+                      <input
+                        type="text"
+                        value={newPortCategory}
+                        onChange={(e) => setNewPortCategory(e.target.value)}
+                        className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:bg-white focus:border-[#FF4500] focus:outline-none"
+                        placeholder="Ex: Comunicação Visual, Películas..."
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-xs font-bold text-gray-600 block mb-1">URL da Imagem *</label>
+                    <input
+                      type="text"
+                      required
+                      value={newPortImage}
+                      onChange={(e) => setNewPortImage(e.target.value)}
+                      className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:bg-white focus:border-[#FF4500] focus:outline-none font-mono"
+                      placeholder="/nome-da-foto.jpg ou https://..."
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-bold text-gray-600 block mb-1">Descrição (Opcional)</label>
+                    <input
+                      type="text"
+                      value={newPortDesc}
+                      onChange={(e) => setNewPortDesc(e.target.value)}
+                      className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:bg-white focus:border-[#FF4500] focus:outline-none"
+                      placeholder="Breve descrição do trabalho..."
+                    />
+                  </div>
+                  <div className="flex gap-2 justify-end pt-1">
+                    <button
+                      type="button"
+                      onClick={() => setIsAddingPortfolioItem(false)}
+                      className="px-4 py-2 text-xs font-bold text-gray-500 hover:text-gray-800 cursor-pointer"
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-5 py-2.5 bg-gradient-to-r from-[#FF4500] to-[#FF6A00] text-white text-xs font-extrabold rounded-xl hover:shadow-lg cursor-pointer"
+                    >
+                      Publicar no Portfólio
+                    </button>
+                  </div>
+                </form>
+              </div>
+            )}
+
+            {/* Grid de fotos */}
+            {portfolioItems.length === 0 ? (
+              <div className="text-center py-16 bg-gray-50 rounded-3xl border border-dashed border-gray-200">
+                <Images className="w-8 h-8 text-gray-300 mx-auto mb-2" />
+                <p className="text-sm font-bold text-gray-500">Nenhuma foto no portfólio ainda.</p>
+                <p className="text-xs text-gray-400 mt-0.5">Clique em "Adicionar Foto" para começar.</p>
+              </div>
+            ) : (
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {portfolioItems.map((item) => (
+                  <div key={item.id} className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div className="relative aspect-square bg-gray-100">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <button
+                        onClick={() => {
+                          if (!window.confirm('Remover esta foto do portfólio?')) return;
+                          onUpdatePortfolio(portfolioItems.filter(i => i.id !== item.id));
+                        }}
+                        className="absolute top-2 right-2 p-1.5 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md cursor-pointer"
+                        title="Remover foto"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                      <span className="absolute top-2 left-2 px-2 py-0.5 text-[8px] font-mono font-bold uppercase tracking-widest text-white bg-black/60 rounded-sm">
+                        {item.category}
+                      </span>
+                    </div>
+                    <div className="p-3">
+                      <p className="text-xs font-bold text-gray-800 line-clamp-2 leading-snug">{item.title}</p>
+                      {item.description && (
+                        <p className="text-[10px] text-gray-400 mt-1 line-clamp-1">{item.description}</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* TAB 5: APROVAÇÃO DE DEPOIMENTOS */}
         {activeTab === 'testimonials' && (
           <div className="space-y-6 animate-fadeIn">
             <div>

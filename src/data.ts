@@ -1,4 +1,4 @@
-import { Product, Testimonial, BudgetRequest, CompanySettings } from './types';
+import { Product, Testimonial, BudgetRequest, CompanySettings, PortfolioItem } from './types';
 
 export const initialProducts: Product[] = [
   {
@@ -234,6 +234,51 @@ export const initialBudgetRequests: BudgetRequest[] = [
     createdAt: '2026-06-20T15:20:00-07:00',
     notes: 'Entregues e pagos no balcão. Cliente extremamente satisfeito.',
     totalEstimate: 120.00
+  }
+];
+
+export const initialPortfolioItems: PortfolioItem[] = [
+  {
+    id: 'port-1',
+    title: 'Adesivação e uniformes — Moto Vix',
+    category: 'Comunicação Visual',
+    image: '/hero-equipe.jpg',
+    description: 'Atendimento e entrega de projeto para a Moto Vix em Serra-ES.'
+  },
+  {
+    id: 'port-2',
+    title: 'Estoque de vinil colorido',
+    category: 'Adesivos & Vinil',
+    image: '/foto-vinil-2.jpg',
+    description: 'Rolos de vinil adesivo em diversas cores para recorte e plotagem.'
+  },
+  {
+    id: 'port-3',
+    title: 'Vinil em rolos — linha profissional',
+    category: 'Adesivos & Vinil',
+    image: '/foto-vinil-3.jpg',
+    description: 'Linha profissional de vinil para comunicação visual e adesivação.'
+  },
+  {
+    id: 'port-4',
+    title: 'Películas metalizadas — estoque',
+    category: 'Películas',
+    image: '/foto-vinil-1.jpg',
+    description: 'Rolos de película metalizada disponíveis em diversas opacidades.'
+  },
+  {
+    id: 'port-5',
+    title: 'Vinil decorativo efeito mármore',
+    category: 'Adesivos & Vinil',
+    image: '/foto-vinil-4.jpg',
+    description: 'Vinil decorativo branco com veios dourados para móveis e superfícies.'
+  },
+  {
+    id: 'port-6',
+    title: 'Adesivo mosaico aplicado em cozinha',
+    category: 'Adesivos & Vinil',
+    image: '/foto-vinil-5.jpg',
+    description: 'Aplicação de adesivo mosaico decorativo em área de cozinha residencial.'
   }
 ];
 

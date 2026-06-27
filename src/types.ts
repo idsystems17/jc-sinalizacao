@@ -51,6 +51,14 @@ export interface Testimonial {
   avatar?: string;
 }
 
+export interface PortfolioItem {
+  id: string;
+  title: string;
+  category: string;
+  image: string;
+  description?: string;
+}
+
 export interface CompanySettings {
   name: string;
   phone: string;

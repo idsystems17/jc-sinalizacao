@@ -14,10 +14,12 @@ export default function Navbar({ currentSection, onNavigate, isAdmin, onToggleAd
 
   const menuItems = [
     { id: 'home', label: 'Início' },
-    { id: 'produtos', label: 'Produtos e Serviços' },
-    { id: 'orcamento', label: 'Solicitar Orçamento' },
-    { id: 'depoimentos', label: 'Depoimentos' },
-    { id: 'contato', label: 'Localização & Contato' }
+    { id: 'sobre', label: 'Sobre' },
+    { id: 'produtos', label: 'Produtos' },
+    { id: 'portfolio', label: 'Portfólio' },
+    { id: 'orcamento', label: 'Orçamento' },
+    { id: 'faq', label: 'FAQ' },
+    { id: 'contato', label: 'Contato' }
   ];
 
   const handleLinkClick = (id: string) => {

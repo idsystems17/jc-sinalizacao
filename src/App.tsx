@@ -10,20 +10,25 @@ import {
 } from 'lucide-react';
 
 // Types and Seed Data
-import { Product, Testimonial, CompanySettings } from './types';
+import { Product, Testimonial, CompanySettings, PortfolioItem } from './types';
 import {
   initialProducts,
   initialTestimonials,
   initialBudgetRequests,
+  initialPortfolioItems,
   defaultCompanySettings
 } from './data';
 
 // Custom Components
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import About from './components/About';
+import HowItWorks from './components/HowItWorks';
 import Showcase from './components/Showcase';
+import Portfolio from './components/Portfolio';
 import BudgetForm from './components/BudgetForm';
 import Testimonials from './components/Testimonials';
+import FAQ from './components/FAQ';
 import ContactMap from './components/ContactMap';
 import AdminPanel from './components/AdminPanel';
 import WhatsAppChat from './components/WhatsAppChat';
@@ -41,6 +46,7 @@ export default function App() {
   // App global content states (cached in localStorage)
   const [products, setProducts] = useState<Product[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [portfolioItems, setPortfolioItems] = useState<PortfolioItem[]>([]);
   const [settings, setSettings] = useState<CompanySettings>(defaultCompanySettings);
 
   // Active custom quote selection draft
@@ -77,7 +83,16 @@ export default function App() {
       localStorage.setItem('jc_testimonials', JSON.stringify(initialTestimonials));
     }
 
-    // 4. Seed initial Budget Requests (Admin demo)
+    // 4. Seed Portfolio Items
+    const cachedPortfolio = localStorage.getItem('jc_portfolio');
+    if (cachedPortfolio) {
+      setPortfolioItems(JSON.parse(cachedPortfolio));
+    } else {
+      setPortfolioItems(initialPortfolioItems);
+      localStorage.setItem('jc_portfolio', JSON.stringify(initialPortfolioItems));
+    }
+
+    // 5. Seed initial Budget Requests (Admin demo)
     const cachedBudgets = localStorage.getItem('jc_budgets');
     if (!cachedBudgets) {
       localStorage.setItem('jc_budgets', JSON.stringify(initialBudgetRequests));
@@ -102,6 +117,12 @@ export default function App() {
   const handleUpdateTestimonials = (updatedTests: Testimonial[]) => {
     setTestimonials(updatedTests);
     localStorage.setItem('jc_testimonials', JSON.stringify(updatedTests));
+  };
+
+  // Update Portfolio handler
+  const handleUpdatePortfolio = (updatedItems: PortfolioItem[]) => {
+    setPortfolioItems(updatedItems);
+    localStorage.setItem('jc_portfolio', JSON.stringify(updatedItems));
   };
 
   // Update Settings handler
@@ -223,12 +244,21 @@ export default function App() {
             {/* Hero Banner Area */}
             <Hero onNavigate={handleNavigate} settings={settings} />
 
+            {/* Sobre a empresa */}
+            <About />
+
+            {/* Como Funciona — 3 passos */}
+            <HowItWorks />
+
             {/* Filterable Products & Services Showcase */}
             <Showcase
               products={products}
               onAddToBudget={handleAddToBudget}
               addedProductIds={selectedProducts.map(p => p.id)}
             />
+
+            {/* Portfólio de trabalhos realizados */}
+            <Portfolio items={portfolioItems} />
 
             {/* Quote Calculator Interactive Budget Request Form */}
             <BudgetForm
@@ -243,6 +273,9 @@ export default function App() {
               testimonials={testimonials}
               onAddTestimonial={handleAddTestimonial}
             />
+
+            {/* Perguntas Frequentes */}
+            <FAQ />
 
             {/* Google Map Location & Contact Address card */}
             <ContactMap settings={settings} />
@@ -283,31 +316,21 @@ export default function App() {
                   <div className="md:col-span-3 space-y-4">
                     <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-editorial-gold">Navegação</h4>
                     <ul className="space-y-2 text-xs text-editorial-charcoal/70 font-medium">
-                      <li>
-                        <button onClick={() => handleNavigate('home')} className="hover:text-editorial-gold transition-colors cursor-pointer text-left">
-                          Início
-                        </button>
-                      </li>
-                      <li>
-                        <button onClick={() => handleNavigate('produtos')} className="hover:text-editorial-gold transition-colors cursor-pointer text-left">
-                          Produtos e Serviços
-                        </button>
-                      </li>
-                      <li>
-                        <button onClick={() => handleNavigate('orcamento')} className="hover:text-editorial-gold transition-colors cursor-pointer text-left">
-                          Solicitar Orçamento
-                        </button>
-                      </li>
-                      <li>
-                        <button onClick={() => handleNavigate('depoimentos')} className="hover:text-editorial-gold transition-colors cursor-pointer text-left">
-                          Depoimentos
-                        </button>
-                      </li>
-                      <li>
-                        <button onClick={() => handleNavigate('contato')} className="hover:text-editorial-gold transition-colors cursor-pointer text-left">
-                          Localização &amp; Contato
-                        </button>
-                      </li>
+                      {[
+                        { id: 'home', label: 'Início' },
+                        { id: 'sobre', label: 'Sobre a Empresa' },
+                        { id: 'produtos', label: 'Produtos e Serviços' },
+                        { id: 'portfolio', label: 'Portfólio' },
+                        { id: 'orcamento', label: 'Solicitar Orçamento' },
+                        { id: 'faq', label: 'Perguntas Frequentes' },
+                        { id: 'contato', label: 'Localização & Contato' },
+                      ].map(item => (
+                        <li key={item.id}>
+                          <button onClick={() => handleNavigate(item.id)} className="hover:text-editorial-gold transition-colors cursor-pointer text-left">
+                            {item.label}
+                          </button>
+                        </li>
+                      ))}
                     </ul>
                   </div>
 
@@ -369,6 +392,8 @@ export default function App() {
               onUpdateProducts={handleUpdateProducts}
               testimonials={testimonials}
               onUpdateTestimonials={handleUpdateTestimonials}
+              portfolioItems={portfolioItems}
+              onUpdatePortfolio={handleUpdatePortfolio}
               settings={settings}
               onUpdateSettings={handleUpdateSettings}
               onLogout={handleLogout}
