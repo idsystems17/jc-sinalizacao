@@ -6,7 +6,7 @@ export const initialProducts: Product[] = [
     name: 'Placa de Sinalização de Segurança Fotoluminescente',
     category: 'sinalizacao',
     description: 'Placas de saída de emergência, extintores e rotas de fuga que brilham no escuro em conformidade com as normas ABNT NBR 13434.',
-    image: 'https://images.unsplash.com/photo-1595113316349-9fa4ee24f884?auto=format&fit=crop&q=80&w=600',
+    image: '/foto-vinil-3.jpg',
     priceEstimate: 'Sob consulta (Média R$ 25,00/unid)',
     features: ['Plástico PVC anti-chamas', 'Alta fotoluminescência', 'Fácil fixação com fita dupla face', 'Resistente a raios UV']
   },
@@ -15,7 +15,7 @@ export const initialProducts: Product[] = [
     name: 'Camisetas Promocionais e Uniformes (Serigrafia)',
     category: 'serigrafia',
     description: 'Personalização de vestuário em alta definição. Perfeito para eventos, uniformes empresariais e ações promocionais de alta durabilidade.',
-    image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=600',
+    image: '/foto-vinil-2.jpg',
     priceEstimate: 'A partir de R$ 18,00 (mínimo 20 peças)',
     features: ['Tinta plastisol ou toque zero', 'Tecido 100% algodão ou poliéster', 'Estamparia em até 4 cores', 'Excelente durabilidade na lavagem']
   },
@@ -24,7 +24,7 @@ export const initialProducts: Product[] = [
     name: 'Adesivo de Vinil Recortado Eletronicamente',
     category: 'adesivos',
     description: 'Adesivos personalizados de vinil em alta resolução para rótulos, decorações, identificações e brindes. Resistentes à água e calor.',
-    image: 'https://images.unsplash.com/photo-1572375995301-40164e323067?auto=format&fit=crop&q=80&w=600',
+    image: '/foto-vinil-2.jpg',
     priceEstimate: 'Calculado por m² (Média R$ 45,00/m²)',
     features: ['Vinil premium calandrado', 'Recorte digital preciso', 'Opção brilhante ou fosco', 'Fácil aplicação sem bolhas']
   },
@@ -33,7 +33,7 @@ export const initialProducts: Product[] = [
     name: 'Banner Comercial em Lona com Bastão e Cordão',
     category: 'comunicacao',
     description: 'Banners de alta definição para frentes de lojas, eventos, apresentações acadêmicas ou promoções de produtos.',
-    image: 'https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&q=80&w=600',
+    image: '/foto-vinil-3.jpg',
     priceEstimate: 'Média R$ 35,00 (tamanho 80x120cm)',
     features: ['Lona resistente de 440g', 'Impressão digital solvente', 'Acabamento com madeira e ponteiras', 'Alta saturação de cores']
   },
@@ -42,7 +42,7 @@ export const initialProducts: Product[] = [
     name: 'Placa de Sinalização de Trânsito e Loteamentos',
     category: 'sinalizacao',
     description: 'Placas indicativas e regulamentares para condomínios, estacionamentos privados, rodovias e sinalização de vias urbanas.',
-    image: 'https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&q=80&w=600',
+    image: '/foto-vinil-4.jpg',
     priceEstimate: 'Sob consulta',
     features: ['Chapa de aço galvanizado ou ACM', 'Película refletiva grau comercial', 'Altamente resistente a intempéries', 'Fixação em postes ou paredes']
   },
@@ -51,7 +51,7 @@ export const initialProducts: Product[] = [
     name: 'Adesivação de Veículos e Frotas',
     category: 'comunicacao',
     description: 'Sua marca em movimento. Adesivagem parcial ou total de carros, furgões e caminhões com vinil automotivo de alta durabilidade.',
-    image: 'https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&q=80&w=600',
+    image: '/foto-vinil-1.jpg',
     priceEstimate: 'Orçamento sob medida',
     features: ['Vinil automotivo antibolhas', 'Verniz protetivo UV opcional', 'Instalação profissional especializada', 'Remoção limpa sem danificar a pintura']
   },
@@ -60,7 +60,7 @@ export const initialProducts: Product[] = [
     name: 'Sacolas Ecológicas Personalizadas',
     category: 'serigrafia',
     description: 'Sacolas de TNT ou Algodão Cru estampadas com a sua marca. Ideais para feiras, eventos corporativos e embalagem de produtos diferenciados.',
-    image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=600',
+    image: '/foto-vinil-2.jpg',
     priceEstimate: 'A partir de R$ 4,50 (mínimo 50 peças)',
     features: ['Cores de tecido variadas', 'Estamparia em Silk Screen', 'Costura reforçada de alta resistência', 'Amigável ao meio ambiente']
   },
@@ -69,7 +69,7 @@ export const initialProducts: Product[] = [
     name: 'Rótulos Adesivos de Alta Resistência para Embalagens',
     category: 'adesivos',
     description: 'Adesivos em bobina ou cartela para cervejas artesanais, cosméticos, alimentos e produtos químicos que necessitam de resistência a umidade.',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600',
+    image: '/foto-vinil-4.jpg',
     priceEstimate: 'Orçamento com base em quantidade e tamanho',
     features: ['Material bopp brilhoso, fosco ou metalizado', 'Corte especial a laser', 'Adesivo permanente forte', 'Resistente a congelamento']
   },
@@ -87,7 +87,7 @@ export const initialProducts: Product[] = [
     name: 'Película Carbono / Cerâmica',
     category: 'peliculas',
     description: 'Linha premium com alta rejeição de infravermelho. Não interfere em GPS, rádio ou Bluetooth. Cor uniforme e durabilidade superior.',
-    image: '/pelicula-tintada.jpg',
+    image: '/pelicula-compass.jpg',
     priceEstimate: 'A partir de R$ 189,00 (rolo 7,5M)',
     features: ['Alta rejeição de calor (IR)', 'Bloqueia 99% dos raios UV', 'Não interfere em sinais eletrônicos', 'Não desbota com o tempo', 'Até 15 anos de garantia']
   },
@@ -114,7 +114,7 @@ export const initialProducts: Product[] = [
     name: 'Película Jateado (Privacidade)',
     category: 'peliculas',
     description: 'Imita o visual de vidro jateado de forma reversível e econômica. Oferece privacidade sem bloquear totalmente a luz. Ideal para banheiros, escritórios e divisórias.',
-    image: '/pelicula-prata.jpg',
+    image: '/foto-vinil-5.jpg',
     priceEstimate: 'A partir de R$ 260,00 (rolo 7,5M)',
     features: ['Efeito vidro jateado cristal', 'Privacidade sem bloquear a luz', 'Aplicação reversível', 'Ideal para divisórias e banheiros', 'Entregamos em toda a Grande Vitória']
   }
