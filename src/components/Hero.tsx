@@ -118,49 +118,40 @@ export default function Hero({ onNavigate, settings }: HeroProps) {
             </div>
           </div>
 
-          {/* Editorial graphical showcase - Beautiful bento block of our curatorship */}
+          {/* Foto real da equipe / trabalho realizado */}
           <div className="lg:col-span-5 relative flex justify-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, ease: 'easeOut' }}
-              className="relative w-full max-w-sm aspect-[4/5] bg-editorial-charcoal rounded-3xl p-6 shadow-xl text-white flex flex-col justify-between overflow-hidden group"
+              className="relative w-full max-w-sm aspect-[4/5] rounded-3xl shadow-xl overflow-hidden group"
             >
-              {/* Sleek minimal grid backdrop */}
-              <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
-              
-              <div className="flex justify-between items-start z-10">
-                <div className="p-2.5 bg-white/10 backdrop-blur-md rounded-full border border-white/25 text-editorial-gold">
-                  <Palette className="w-5 h-5" />
-                </div>
-                <span className="text-[9px] font-mono font-bold tracking-[0.2em] text-editorial-gold px-3 py-1 rounded-full bg-white/5 border border-white/15 uppercase">
-                  Atelier Corporativo
+              <img
+                src="/hero-equipe.jpg"
+                alt="Equipe JC Sinalização atendendo cliente na Moto Vix"
+                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+              />
+
+              {/* Overlay gradiente suave na base */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none"></div>
+
+              {/* Badge laranja no topo */}
+              <div className="absolute top-4 right-4 z-10">
+                <span className="text-[9px] font-mono font-bold tracking-[0.2em] text-white px-3 py-1 rounded-full bg-editorial-gold border border-white/20 uppercase shadow">
+                  Clientes Satisfeitos
                 </span>
               </div>
 
-              {/* Simulated curatorship illustration */}
-              <div className="my-auto py-4 z-10 flex flex-col items-center justify-center text-center">
-                <div className="w-32 h-44 bg-editorial-accent-bg rounded-t-full relative overflow-hidden shrink-0 border border-white/10 shadow-lg">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-11/12 text-center">
-                    <span className="text-[8px] font-mono uppercase tracking-widest text-editorial-gold block">Lote Curado</span>
-                    <span className="text-[10px] font-serif italic text-white block mt-0.5">Série Sinalização</span>
-                  </div>
+              {/* Caption na base */}
+              <div className="absolute bottom-4 left-4 right-4 z-10">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="w-2 h-2 rounded-full bg-editorial-gold animate-pulse"></span>
+                  <span className="text-[9px] font-mono text-white/70 uppercase tracking-widest">Trabalho realizado</span>
                 </div>
-                
-                <h3 className="text-xl font-serif italic text-white mt-6">Sinalização Sob Medida</h3>
-                <p className="text-[10px] font-mono text-[#FAF9F6]/60 mt-2 tracking-widest uppercase">
-                  Aço Galvanizado • ACM • Acrílico
+                <p className="text-sm font-serif italic text-white leading-snug">
+                  Adesivação e uniformes para<br />
+                  <span className="font-bold not-italic text-editorial-gold">Moto Vix — Serra, ES</span>
                 </p>
-              </div>
-
-              {/* Micro specs of the editorial visual */}
-              <div className="flex justify-between items-center border-t border-white/10 pt-4 z-10 text-[9px] font-mono text-[#FAF9F6]/50 uppercase tracking-widest">
-                <div className="flex gap-1.5 items-center">
-                  <span className="w-2 h-2 bg-editorial-gold rounded-full animate-pulse"></span>
-                  <span>Gestão Direta</span>
-                </div>
-                <span>Estética Minimalista</span>
               </div>
             </motion.div>
           </div>
