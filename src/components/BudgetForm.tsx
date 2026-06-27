@@ -91,39 +91,9 @@ export default function BudgetForm({ selectedProducts, onRemoveProduct, onClearP
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (items.length === 0) return;
-
-    const requestID = `ORC-${Math.floor(1000 + Math.random() * 9000)}`;
-    
-    const newRequest: BudgetRequest = {
-      id: requestID,
-      customerName: name,
-      customerEmail: email,
-      customerPhone: phone,
-      customerCompany: company,
-      items: items,
-      status: 'pending',
-      createdAt: new Date().toISOString(),
-      notes: notes,
-      totalEstimate: 0
-    };
-
-    const stored = localStorage.getItem('jc_budgets');
-    const budgetsList: BudgetRequest[] = stored ? JSON.parse(stored) : [];
-    budgetsList.unshift(newRequest);
-    localStorage.setItem('jc_budgets', JSON.stringify(budgetsList));
-
-    window.dispatchEvent(new Event('jc_new_budget_request'));
-
-    setSubmittedId(requestID);
-    setIsSubmitted(true);
-  };
-
-  const handleWhatsAppSend = () => {
+  const buildWhatsAppMessage = (requestID: string) => {
     let text = `*Solicitação de Orçamento - JC Sinalização & Serigrafia*\n`;
-    text += `*ID:* ${submittedId}\n`;
+    text += `*ID:* ${requestID}\n`;
     text += `*Cliente:* ${name}\n`;
     if (company) text += `*Empresa:* ${company}\n`;
     text += `*Contato:* ${phone} / ${email}\n\n`;
@@ -144,7 +114,45 @@ export default function BudgetForm({ selectedProducts, onRemoveProduct, onClearP
       text += `\n*Anotações Gerais:* ${notes}\n`;
     }
 
-    const encoded = encodeURIComponent(text);
+    return text;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (items.length === 0) return;
+
+    const requestID = `ORC-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    const newRequest: BudgetRequest = {
+      id: requestID,
+      customerName: name,
+      customerEmail: email,
+      customerPhone: phone,
+      customerCompany: company,
+      items: items,
+      status: 'pending',
+      createdAt: new Date().toISOString(),
+      notes: notes,
+      totalEstimate: 0
+    };
+
+    const stored = localStorage.getItem('jc_budgets');
+    const budgetsList: BudgetRequest[] = stored ? JSON.parse(stored) : [];
+    budgetsList.unshift(newRequest);
+    localStorage.setItem('jc_budgets', JSON.stringify(budgetsList));
+
+    window.dispatchEvent(new Event('jc_new_budget_request'));
+
+    // Abre WhatsApp automaticamente ao enviar
+    const encoded = encodeURIComponent(buildWhatsAppMessage(requestID));
+    window.open(`https://wa.me/${settings.phone}?text=${encoded}`, '_blank');
+
+    setSubmittedId(requestID);
+    setIsSubmitted(true);
+  };
+
+  const handleWhatsAppSend = () => {
+    const encoded = encodeURIComponent(buildWhatsAppMessage(submittedId));
     window.open(`https://wa.me/${settings.phone}?text=${encoded}`, '_blank');
   };
 
@@ -423,8 +431,8 @@ export default function BudgetForm({ selectedProducts, onRemoveProduct, onClearP
               </p>
 
               <p className="text-xs text-editorial-charcoal/80 leading-relaxed mb-8 max-w-md mx-auto">
-                Sua solicitação de cotação já foi registrada em nosso sistema de gestão e nossa equipe começará a analisá-la imediatamente. 
-                Se desejar, você pode agilizar o retorno enviando os detalhes agora mesmo diretamente pelo nosso WhatsApp corporativo!
+                Sua solicitação foi registrada e o WhatsApp já foi aberto com todos os detalhes prontos para enviar.
+                Caso a janela não tenha aberto, clique no botão abaixo para tentar novamente.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -435,7 +443,7 @@ export default function BudgetForm({ selectedProducts, onRemoveProduct, onClearP
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.388 1.981 13.93 1.95 12.01 1.95c-5.434 0-9.858 4.37-9.863 9.8-.001 1.77.462 3.5 1.34 5.024l-1.022 3.73 3.837-.993a9.71 9.71 0 0 0 4.755 1.243z" />
                   </svg>
-                  Enviar via WhatsApp
+                  Abrir WhatsApp Novamente
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
