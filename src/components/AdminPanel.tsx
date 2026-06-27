@@ -916,6 +916,8 @@ export default function AdminPanel({
                         src={prod.image}
                         alt={prod.name}
                         referrerPolicy="no-referrer"
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute top-2 right-2 flex gap-1">
@@ -1168,6 +1170,8 @@ export default function AdminPanel({
                       <img
                         src={item.image}
                         alt={item.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover"
                       />
                       <button
