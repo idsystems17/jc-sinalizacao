@@ -17,7 +17,8 @@ import {
   RefreshCw,
   PhoneCall,
   LogOut,
-  Images
+  Images,
+  Pencil
 } from 'lucide-react';
 import { BudgetRequest, Product, Testimonial, CompanySettings, PortfolioItem } from '../types';
 
@@ -60,11 +61,20 @@ export default function AdminPanel({
   // Catalog manager state
   const [isAddingProduct, setIsAddingProduct] = useState(false);
   const [newProdName, setNewProdName] = useState('');
-  const [newProdCategory, setNewProdCategory] = useState<'sinalizacao' | 'serigrafia' | 'comunicacao' | 'adesivos'>('sinalizacao');
+  const [newProdCategory, setNewProdCategory] = useState<Product['category']>('sinalizacao');
   const [newProdDesc, setNewProdDesc] = useState('');
   const [newProdImage, setNewProdImage] = useState('');
   const [newProdFeatures, setNewProdFeatures] = useState('');
   const [newProdPrice, setNewProdPrice] = useState('');
+
+  // Edit product state
+  const [editingProductId, setEditingProductId] = useState<string | null>(null);
+  const [editProdName, setEditProdName] = useState('');
+  const [editProdCategory, setEditProdCategory] = useState<Product['category']>('sinalizacao');
+  const [editProdDesc, setEditProdDesc] = useState('');
+  const [editProdImage, setEditProdImage] = useState('');
+  const [editProdFeatures, setEditProdFeatures] = useState('');
+  const [editProdPrice, setEditProdPrice] = useState('');
 
   // Portfolio manager state
   const [isAddingPortfolioItem, setIsAddingPortfolioItem] = useState(false);
@@ -197,6 +207,35 @@ export default function AdminPanel({
     if (!window.confirm('Tem certeza de que deseja remover este produto da vitrine?')) return;
     const filtered = products.filter(p => p.id !== productId);
     onUpdateProducts(filtered);
+  };
+
+  const handleStartEditProduct = (prod: Product) => {
+    setEditingProductId(prod.id);
+    setEditProdName(prod.name);
+    setEditProdCategory(prod.category);
+    setEditProdDesc(prod.description);
+    setEditProdImage(prod.image);
+    setEditProdFeatures(prod.features.join('\n'));
+    setEditProdPrice(prod.priceEstimate || '');
+    setIsAddingProduct(false);
+  };
+
+  const handleSaveEditProduct = (e: React.FormEvent) => {
+    e.preventDefault();
+    const updated = products.map(p => {
+      if (p.id !== editingProductId) return p;
+      return {
+        ...p,
+        name: editProdName,
+        category: editProdCategory,
+        description: editProdDesc,
+        image: editProdImage,
+        priceEstimate: editProdPrice || 'Sob consulta',
+        features: editProdFeatures.split('\n').filter(f => f.trim() !== '')
+      };
+    });
+    onUpdateProducts(updated);
+    setEditingProductId(null);
   };
 
   // Testimonial Approval Actions
@@ -870,38 +909,140 @@ export default function AdminPanel({
             {/* Catalog Grid */}
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {products.map((prod) => (
-                <div key={prod.id} className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
-                  <div className="relative aspect-video bg-gray-100">
-                    <img
-                      src={prod.image}
-                      alt={prod.name}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover"
-                    />
-                    <button
-                      onClick={() => handleDeleteProduct(prod.id)}
-                      className="absolute top-2 right-2 p-1.5 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md cursor-pointer transition-colors"
-                      title="Excluir produto"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                <div key={prod.id} className="flex flex-col">
+                  <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div className="relative aspect-video bg-gray-100">
+                      <img
+                        src={prod.image}
+                        alt={prod.name}
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute top-2 right-2 flex gap-1">
+                        <button
+                          onClick={() => editingProductId === prod.id ? setEditingProductId(null) : handleStartEditProduct(prod)}
+                          className="p-1.5 bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow-md cursor-pointer transition-colors"
+                          title="Editar produto"
+                        >
+                          <Pencil className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteProduct(prod.id)}
+                          className="p-1.5 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md cursor-pointer transition-colors"
+                          title="Excluir produto"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="p-4 flex-grow flex flex-col justify-between">
+                      <div>
+                        <span className="text-[9px] font-black uppercase tracking-wider text-[#FF4500] bg-orange-50 px-1.5 py-0.5 rounded-md">
+                          {prod.category}
+                        </span>
+                        <h4 className="text-xs sm:text-sm font-extrabold text-gray-900 mt-2 line-clamp-2 leading-snug">
+                          {prod.name}
+                        </h4>
+                      </div>
+                      <div className="border-t border-gray-50 pt-3 mt-3 flex justify-between items-baseline text-[11px]">
+                        <span className="text-gray-400">Preço Est:</span>
+                        <span className="font-bold text-gray-800">{prod.priceEstimate}</span>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="p-4 flex-grow flex flex-col justify-between">
-                    <div>
-                      <span className="text-[9px] font-black uppercase tracking-wider text-[#FF4500] bg-orange-50 px-1.5 py-0.5 rounded-md">
-                        {prod.category}
-                      </span>
-                      <h4 className="text-xs sm:text-sm font-extrabold text-gray-900 mt-2 line-clamp-2 leading-snug">
-                        {prod.name}
+                  {/* Formulário de edição inline */}
+                  {editingProductId === prod.id && (
+                    <div className="mt-2 bg-blue-50 border border-blue-200 rounded-2xl p-4 col-span-full">
+                      <h4 className="text-xs font-extrabold text-gray-800 mb-3 flex items-center gap-1.5">
+                        <Pencil className="w-3.5 h-3.5 text-blue-500" /> Editar produto
                       </h4>
+                      <form onSubmit={handleSaveEditProduct} className="space-y-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div>
+                            <label className="text-[10px] font-bold text-gray-600 block mb-1">Nome</label>
+                            <input
+                              type="text"
+                              required
+                              value={editProdName}
+                              onChange={(e) => setEditProdName(e.target.value)}
+                              className="w-full p-2 bg-white border border-gray-200 rounded-xl text-xs focus:border-blue-400 focus:outline-none"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-[10px] font-bold text-gray-600 block mb-1">Categoria</label>
+                            <select
+                              value={editProdCategory}
+                              onChange={(e: any) => setEditProdCategory(e.target.value)}
+                              className="w-full p-2 bg-white border border-gray-200 rounded-xl text-xs focus:outline-none"
+                            >
+                              <option value="sinalizacao">Sinalização</option>
+                              <option value="serigrafia">Serigrafia / Silk</option>
+                              <option value="comunicacao">Comunicação Visual</option>
+                              <option value="adesivos">Adesivos</option>
+                              <option value="peliculas">Películas</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div>
+                          <label className="text-[10px] font-bold text-gray-600 block mb-1">URL da Foto</label>
+                          <input
+                            type="text"
+                            value={editProdImage}
+                            onChange={(e) => setEditProdImage(e.target.value)}
+                            className="w-full p-2 bg-white border border-gray-200 rounded-xl text-xs focus:border-blue-400 focus:outline-none font-mono"
+                            placeholder="/nome-da-foto.jpg ou https://..."
+                          />
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div>
+                            <label className="text-[10px] font-bold text-gray-600 block mb-1">Preço Sugerido</label>
+                            <input
+                              type="text"
+                              value={editProdPrice}
+                              onChange={(e) => setEditProdPrice(e.target.value)}
+                              className="w-full p-2 bg-white border border-gray-200 rounded-xl text-xs focus:border-blue-400 focus:outline-none"
+                              placeholder="Ex: R$ 45,00/m²"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-[10px] font-bold text-gray-600 block mb-1">Descrição</label>
+                            <input
+                              type="text"
+                              value={editProdDesc}
+                              onChange={(e) => setEditProdDesc(e.target.value)}
+                              className="w-full p-2 bg-white border border-gray-200 rounded-xl text-xs focus:border-blue-400 focus:outline-none"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="text-[10px] font-bold text-gray-600 block mb-1">Destaques (um por linha)</label>
+                          <textarea
+                            value={editProdFeatures}
+                            onChange={(e) => setEditProdFeatures(e.target.value)}
+                            rows={3}
+                            className="w-full p-2 bg-white border border-gray-200 rounded-xl text-xs focus:border-blue-400 focus:outline-none"
+                          />
+                        </div>
+                        <div className="flex gap-2 justify-end">
+                          <button
+                            type="button"
+                            onClick={() => setEditingProductId(null)}
+                            className="px-3 py-1.5 text-xs font-bold text-gray-500 hover:text-gray-800 cursor-pointer"
+                          >
+                            Cancelar
+                          </button>
+                          <button
+                            type="submit"
+                            className="flex items-center gap-1 px-4 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-xs font-extrabold rounded-xl cursor-pointer"
+                          >
+                            <Save className="w-3.5 h-3.5" /> Salvar
+                          </button>
+                        </div>
+                      </form>
                     </div>
-
-                    <div className="border-t border-gray-50 pt-3 mt-3 flex justify-between items-baseline text-[11px]">
-                      <span className="text-gray-400">Preço Est:</span>
-                      <span className="font-bold text-gray-800">{prod.priceEstimate}</span>
-                    </div>
-                  </div>
+                  )}
                 </div>
               ))}
             </div>

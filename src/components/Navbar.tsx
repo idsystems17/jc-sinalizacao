@@ -61,31 +61,19 @@ export default function Navbar({ currentSection, onNavigate, isAdmin, onToggleAd
               </span>
             )}
 
-            <div className="h-6 w-px bg-editorial-charcoal/10 mx-2"></div>
-
-            <button
-              onClick={() => {
-                onToggleAdmin();
-                setIsOpen(false);
-              }}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-[0.15em] transition-all duration-200 cursor-pointer ${
-                isAdmin
-                  ? 'bg-[#F2EFE9] text-editorial-charcoal hover:bg-[#E5E2D9] border border-editorial-charcoal/15'
-                  : 'bg-editorial-charcoal text-white shadow-sm hover:bg-editorial-gold'
-              }`}
-            >
-              {isAdmin ? (
-                <>
+            {/* Botão de painel só aparece quando já está no modo admin */}
+            {isAdmin && (
+              <>
+                <div className="h-6 w-px bg-editorial-charcoal/10 mx-2"></div>
+                <button
+                  onClick={() => { onToggleAdmin(); setIsOpen(false); }}
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-[0.15em] transition-all duration-200 cursor-pointer bg-[#F2EFE9] text-editorial-charcoal hover:bg-[#E5E2D9] border border-editorial-charcoal/15"
+                >
                   <FileText className="w-3.5 h-3.5" />
                   Ir para a Vitrine
-                </>
-              ) : (
-                <>
-                  <ShieldAlert className="w-3.5 h-3.5" />
-                  Painel de Gestão
-                </>
-              )}
-            </button>
+                </button>
+              </>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -124,31 +112,17 @@ export default function Navbar({ currentSection, onNavigate, isAdmin, onToggleAd
                   </div>
                 )}
 
-                <div className="border-t border-editorial-charcoal/10 my-2 pt-2 px-2">
-                  <button
-                    onClick={() => {
-                      onToggleAdmin();
-                      setIsOpen(false);
-                    }}
-                    className={`flex items-center justify-center gap-2 w-full px-4 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-200 ${
-                      isAdmin
-                        ? 'bg-[#F2EFE9] text-editorial-charcoal border border-editorial-charcoal/15'
-                        : 'bg-editorial-charcoal text-white'
-                    }`}
-                  >
-                    {isAdmin ? (
-                      <>
-                        <FileText className="w-4 h-4" />
-                        Voltar para a Vitrine
-                      </>
-                    ) : (
-                      <>
-                        <ShieldAlert className="w-4 h-4" />
-                        Acessar Painel de Gestão
-                      </>
-                    )}
-                  </button>
-                </div>
+                {isAdmin && (
+                  <div className="border-t border-editorial-charcoal/10 my-2 pt-2 px-2">
+                    <button
+                      onClick={() => { onToggleAdmin(); setIsOpen(false); }}
+                      className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-full text-xs font-black uppercase tracking-widest bg-[#F2EFE9] text-editorial-charcoal border border-editorial-charcoal/15"
+                    >
+                      <FileText className="w-4 h-4" />
+                      Voltar para a Vitrine
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           )}

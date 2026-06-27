@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Instagram,
@@ -34,12 +34,31 @@ import AdminPanel from './components/AdminPanel';
 import WhatsAppChat from './components/WhatsAppChat';
 import LoginModal from './components/LoginModal';
 
+// Versão dos dados — incrementar força re-seed no localStorage
+const DATA_VERSION = '2';
+
 export default function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(
     () => !!sessionStorage.getItem('jc_auth_user')
   );
+
+  // Atalho secreto: Ctrl + Alt + J abre o login
+  const keysRef = useRef<Set<string>>(new Set());
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      keysRef.current.add(e.key);
+      if (keysRef.current.has('Control') && keysRef.current.has('Alt') && keysRef.current.has('j')) {
+        e.preventDefault();
+        if (!isAdmin && !showLoginModal) setShowLoginModal(true);
+      }
+    };
+    const up = (e: KeyboardEvent) => keysRef.current.delete(e.key);
+    window.addEventListener('keydown', down);
+    window.addEventListener('keyup', up);
+    return () => { window.removeEventListener('keydown', down); window.removeEventListener('keyup', up); };
+  }, [isAdmin, showLoginModal]);
 
   const [currentSection, setCurrentSection] = useState('home');
 
@@ -57,7 +76,16 @@ export default function App() {
 
   // Synchronize localStorage cache on first mount
   useEffect(() => {
-    // 1. Seed Company Settings
+    // Controle de versão: se a versão mudou, re-seed produtos e portfólio
+    const storedVersion = localStorage.getItem('jc_data_version');
+    const versionChanged = storedVersion !== DATA_VERSION;
+    if (versionChanged) {
+      localStorage.setItem('jc_data_version', DATA_VERSION);
+      localStorage.removeItem('jc_products');
+      localStorage.removeItem('jc_portfolio');
+    }
+
+    // 1. Seed Company Settings (nunca sobrescreve — dados do cliente)
     const cachedSettings = localStorage.getItem('jc_company_settings');
     if (cachedSettings) {
       setSettings(JSON.parse(cachedSettings));
@@ -369,10 +397,10 @@ export default function App() {
                   
                   <button
                     onClick={handleRequestAdmin}
-                    className="flex items-center gap-1 hover:text-editorial-gold transition-colors cursor-pointer border-b border-editorial-charcoal/20 pb-0.5"
+                    className="flex items-center gap-1 opacity-20 hover:opacity-60 transition-opacity cursor-pointer"
+                    title="Acesso restrito"
                   >
-                    <Lock className="w-3.5 h-3.5" />
-                    Acesso Restrito
+                    <Lock className="w-3 h-3" />
                   </button>
                 </div>
               </div>
